@@ -1,0 +1,10 @@
+[Unit]
+Description=Demo Web App
+Requires=network.target
+After=syslog.target network.target
+[Service]
+WorkingDirectory=/opt/demo
+ExecStart=java -jar /opt/demo/spring-boot-example.jar
+User=root
+[Install]
+WantedBy=multi-user.target

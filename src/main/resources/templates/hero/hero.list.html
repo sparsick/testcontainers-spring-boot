@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Hero Demo</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}">
+</head>
+
+<body>
+
+<main role="main" class="container">
+    <h1>Hero List</h1>
+    <div class="row col-md-7 table-responsive">
+        <table id="customerTable" class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>City</th>
+                <th>Universum</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="hero, rowStat: ${heros}"
+                th:style="${rowStat.odd} ? 'color: gray' : 'color: black;'">
+                <td th:text="${hero.name}">Jack</td>
+                <td th:text="${hero.city}">New York</td>
+                <td th:text="${hero.universum.displayName}">Marvel</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            <a role="button" class="btn btn-outline-secondary" th:href="@{/hero/new}"><i class='fas fa-user-shield'></i> Add new hero</a>
+        </div>
+        <div class="col-sm">
+            <a role="button" class="btn btn-outline-secondary" th:href="@{/hero}"><i class='fas fa-search'></i> Go to search</a>
+        </div>
+    </div>
+    <div class="row">
+        <p> Data are coming from <span th:text="${ipAddress}"> xxx.xxx.xxx.xxx </span></p>
+    </div>
+
+</main>
+</body>
+</html>

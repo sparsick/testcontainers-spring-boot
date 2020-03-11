@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Hero Demo</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}">
+</head>
+
+<body>
+
+<main role="main" class="container">
+    <h1>Hero Search Machine</h1>
+    <div class="row">
+        <form th:action="@{/hero/list}" method="get">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <button class="btn btn-outline-secondary" type="submit" id="button-search">
+                        <i class='fas fa-search'></i> Search
+                    </button>
+                </div>
+                <input type="text" class="form-control" name="search" id="search" th:value="${search}"/>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <p>You find a new hero? Fill Expand database</p>
+    </div>
+    <div class="row">
+        <a role="button" class="btn btn-outline-secondary" th:href="@{/hero/new}"><i class='fas fa-user-shield'></i> Add new hero</a>
+    </div>
+    <div class="row">
+        <p> Data are coming from <span th:text="${ipAddress}"> xxx.xxx.xxx.xxx </span></p>
+    </div>
+
+</main>
+</body>
+</html>
