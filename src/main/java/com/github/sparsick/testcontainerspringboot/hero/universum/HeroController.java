@@ -15,9 +15,9 @@ import java.util.Collection;
 @Controller
 public class HeroController {
 
-    private HeroRepository heroRepository;
+    private HeroClassicJpaRepository heroRepository;
 
-    public HeroController(HeroRepository heroRepository) {
+    public HeroController(HeroClassicJpaRepository heroRepository) {
         this.heroRepository = heroRepository;
     }
 

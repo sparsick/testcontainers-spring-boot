@@ -8,19 +8,8 @@ mvn spring-boot:run
 
 Application URL: `http://localhost:8080/hero`
 
-API for Prometheus: `http://localhost:8080/actuator/prometheus`
-
-# Application Monitoring
+A database is needed
 
 ```
-cd application-monitoring
-docker-compose up
+docker run --name my-sql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql
 ```
-
-start Prometheus and Grafana
-
-Grafana: http://localhost:3000
-Username: admin
-Passwort: pass
-
-Prometheus: http://localhost:9090

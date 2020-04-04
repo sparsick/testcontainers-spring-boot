@@ -1,8 +1,16 @@
 package com.github.sparsick.testcontainerspringboot.hero.universum;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Objects;
 
+@Entity
 public class Hero {
+
+    @Id
+    @GeneratedValue
+    private Long id;
 
     private String name;
 
@@ -20,29 +28,6 @@ public class Hero {
 
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public ComicUniversum getUniversum() {
-        return universum;
-    }
-
-    public void setUniversum(ComicUniversum universum) {
-        this.universum = universum;
-    }
 
     @Override
     public boolean equals(Object o) {
