@@ -29,12 +29,14 @@ class HeroClassicJpaRepositoryTest {
 
     @Test
     void findAllHero(){
+        int numberHeros = repositoryUnderTest.allHeros().size();
+
         repositoryUnderTest.addHero(new Hero("Batman", "Gotham City", ComicUniversum.DC_COMICS));
         repositoryUnderTest.addHero(new Hero("Superman", "Metropolis", ComicUniversum.DC_COMICS));
 
         Collection<Hero> heros = repositoryUnderTest.allHeros();
 
-        assertThat(heros).hasSize(2);
+        assertThat(heros).hasSize(numberHeros + 2);
     }
 
     @Test
@@ -43,7 +45,7 @@ class HeroClassicJpaRepositoryTest {
 
         Collection<Hero> heros = repositoryUnderTest.findHerosBySearchCriteria("Batman");
 
-        assertThat(heros).hasSize(1).contains(new Hero("Batman", "Gotham City", ComicUniversum.DC_COMICS));
+        assertThat(heros).contains(new Hero("Batman", "Gotham City", ComicUniversum.DC_COMICS));
     }
 
     static class Initializer implements
