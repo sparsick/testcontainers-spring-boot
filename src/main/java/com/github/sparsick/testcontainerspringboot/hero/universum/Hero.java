@@ -28,6 +28,17 @@ public class Hero {
 
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public ComicUniversum getUniversum() {
+        return universum;
+    }
 
     @Override
     public boolean equals(Object o) {
