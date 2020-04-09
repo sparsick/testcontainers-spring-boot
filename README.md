@@ -11,5 +11,5 @@ Application URL: `http://localhost:8080/hero`
 A database is needed
 
 ```
-docker run --name my-sql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql
+docker run --name my-sql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=my-secret-pw -e MYSQL_DATABASE=test -e MYSQL_USER=user -e MYSQL_PASSWORD=pwd -d mysql
 ```
