@@ -19,8 +19,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ContextConfiguration(initializers = HeroClassicJpaRepositoryTest.Initializer.class)
 @Testcontainers
 class HeroClassicJpaRepositoryTest {
-
-
     @Container
     private static MySQLContainer database = new MySQLContainer();
 
@@ -59,5 +57,4 @@ class HeroClassicJpaRepositoryTest {
             ).applyTo(configurableApplicationContext.getEnvironment());
         }
     }
-
 }
