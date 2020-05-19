@@ -8,7 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-@SpringBootTest
+
 @ContextConfiguration(initializers = DatabaseBaseTest.Initializer.class)
 @Testcontainers
 public abstract class DatabaseBaseTest {
