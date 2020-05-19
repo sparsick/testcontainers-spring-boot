@@ -1,12 +1,6 @@
 language: java
 jdk:
   - openjdk11
-before_install:
-  - npm install -g snyk
-  - snyk -v
-after_success:
-  - snyk auth
-  - snyk test
 notifications:
   email:
     on_success: always
