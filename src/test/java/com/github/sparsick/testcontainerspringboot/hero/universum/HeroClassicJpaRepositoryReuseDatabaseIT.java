@@ -19,7 +19,7 @@ import java.util.Collection;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-class HeroClassicJpaRepositoryReuseDatabaseTest extends DatabaseBaseTest {
+class HeroClassicJpaRepositoryReuseDatabaseIT extends DatabaseBaseTest {
 
     @Autowired
     private HeroClassicJpaRepository repositoryUnderTest;

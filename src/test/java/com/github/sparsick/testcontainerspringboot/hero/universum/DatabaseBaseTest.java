@@ -1,6 +1,5 @@
 package com.github.sparsick.testcontainerspringboot.hero.universum;
 
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;

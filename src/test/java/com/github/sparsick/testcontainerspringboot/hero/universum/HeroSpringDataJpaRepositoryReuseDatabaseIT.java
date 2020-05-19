@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class HeroSpringDataJpaRepositoryReuseDatabaseTest extends DatabaseBaseTest {
+class HeroSpringDataJpaRepositoryReuseDatabaseIT extends DatabaseBaseTest {
 
     @Autowired
     private HeroSpringDataJpaRepository repositoryUnderTest;

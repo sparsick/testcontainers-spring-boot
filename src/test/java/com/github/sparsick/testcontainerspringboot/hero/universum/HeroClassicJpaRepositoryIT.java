@@ -2,8 +2,6 @@ package com.github.sparsick.testcontainerspringboot.hero.universum;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ApplicationContextInitializer;
@@ -16,27 +14,36 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import java.util.Collection;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@ContextConfiguration(initializers = HeroSpringDataJpaRepositoryTest.Initializer.class)
+@SpringBootTest
+@ContextConfiguration(initializers = HeroClassicJpaRepositoryIT.Initializer.class)
 @Testcontainers
-class HeroSpringDataJpaRepositoryTest {
-
+class HeroClassicJpaRepositoryIT {
     @Container
     private static MySQLContainer database = new MySQLContainer();
 
     @Autowired
-    private HeroSpringDataJpaRepository repositoryUnderTest;
+    private HeroClassicJpaRepository repositoryUnderTest;
 
     @Test
-    void findHerosBySearchCriteria() {
-        repositoryUnderTest.save(new Hero("Batman", "Gotham City", ComicUniversum.DC_COMICS));
+    void findAllHero(){
+        int numberHeros = repositoryUnderTest.allHeros().size();
+
+        repositoryUnderTest.addHero(new Hero("Batman", "Gotham City", ComicUniversum.DC_COMICS));
+        repositoryUnderTest.addHero(new Hero("Superman", "Metropolis", ComicUniversum.DC_COMICS));
+
+        Collection<Hero> heros = repositoryUnderTest.allHeros();
+
+        assertThat(heros).hasSize(numberHeros + 2);
+    }
+
+    @Test
+    void findHeroByCriteria(){
+        repositoryUnderTest.addHero(new Hero("Batman", "Gotham City", ComicUniversum.DC_COMICS));
 
         Collection<Hero> heros = repositoryUnderTest.findHerosBySearchCriteria("Batman");
 
-        assertThat(heros).hasSize(1).contains(new Hero("Batman", "Gotham City", ComicUniversum.DC_COMICS));
+        assertThat(heros).contains(new Hero("Batman", "Gotham City", ComicUniversum.DC_COMICS));
     }
 
     static class Initializer implements

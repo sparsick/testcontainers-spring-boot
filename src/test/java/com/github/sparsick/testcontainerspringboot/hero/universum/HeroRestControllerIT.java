@@ -9,7 +9,6 @@ import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -23,10 +22,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-@ContextConfiguration(initializers = HeroRestControllerITest.Initializer.class)
+@ContextConfiguration(initializers = HeroRestControllerIT.Initializer.class)
 @AutoConfigureMockMvc
 @Testcontainers
-class HeroRestControllerITest {
+class HeroRestControllerIT {
 
     @Container
     private static MySQLContainer database = new MySQLContainer();
