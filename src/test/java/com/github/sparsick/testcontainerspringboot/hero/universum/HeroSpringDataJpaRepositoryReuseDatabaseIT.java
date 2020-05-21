@@ -22,7 +22,6 @@ class HeroSpringDataJpaRepositoryReuseDatabaseIT extends DatabaseBaseTest {
 
         Collection<Hero> heros = repositoryUnderTest.findHerosBySearchCriteria("Batman");
 
-        assertThat(heros).hasSize(1).contains(new Hero("Batman", "Gotham City", ComicUniversum.DC_COMICS));
+        assertThat(heros).contains(new Hero("Batman", "Gotham City", ComicUniversum.DC_COMICS));
     }
-
 }

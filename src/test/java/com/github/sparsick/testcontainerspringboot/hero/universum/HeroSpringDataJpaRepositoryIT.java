@@ -21,7 +21,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ContextConfiguration(initializers = HeroSpringDataJpaRepositoryIT.Initializer.class)
 @Testcontainers
 class HeroSpringDataJpaRepositoryIT {
-
     @Container
     private static MySQLContainer database = new MySQLContainer();
 

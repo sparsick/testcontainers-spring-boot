@@ -8,25 +8,24 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HeroRestController {
 
-    private final HeroSpringDataJpaRepository heroController;
+    private final HeroSpringDataJpaRepository heroRepository;
 
-    public HeroRestController(HeroSpringDataJpaRepository heroController) {
-        this.heroController = heroController;
+    public HeroRestController(HeroSpringDataJpaRepository heroRepository) {
+        this.heroRepository = heroRepository;
     }
 
     @GetMapping("heros")
     public Iterable<Hero> allHeros(String searchCriteria) {
         if (searchCriteria == null || searchCriteria.equals("")) {
-            return heroController.findAll();
+            return heroRepository.findAll();
 
         }
 
-        return heroController.findHerosBySearchCriteria(searchCriteria);
+        return heroRepository.findHerosBySearchCriteria(searchCriteria);
     }
 
     @PostMapping("hero")
     public void hero(@RequestBody Hero hero) {
-        heroController.save(hero);
+        heroRepository.save(hero);
     }
-
 }

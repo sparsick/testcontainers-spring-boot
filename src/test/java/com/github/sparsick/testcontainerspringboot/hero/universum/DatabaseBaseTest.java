@@ -11,7 +11,6 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @ContextConfiguration(initializers = DatabaseBaseTest.Initializer.class)
 @Testcontainers
 public abstract class DatabaseBaseTest {
-
     static final MySQLContainer DATABASE = new MySQLContainer();
 
     static {
