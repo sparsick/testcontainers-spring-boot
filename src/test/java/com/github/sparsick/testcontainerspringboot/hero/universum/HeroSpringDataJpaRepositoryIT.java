@@ -8,6 +8,8 @@ import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -18,7 +20,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@ContextConfiguration(initializers = HeroSpringDataJpaRepositoryIT.Initializer.class)
 @Testcontainers
 class HeroSpringDataJpaRepositoryIT {
     @Container
@@ -36,15 +37,10 @@ class HeroSpringDataJpaRepositoryIT {
         assertThat(heros).hasSize(1).contains(new Hero("Batman", "Gotham City", ComicUniversum.DC_COMICS));
     }
 
-    static class Initializer implements
-            ApplicationContextInitializer<ConfigurableApplicationContext> {
-        public void initialize(ConfigurableApplicationContext
-                                       configurableApplicationContext) {
-            TestPropertyValues.of(
-                    "spring.datasource.url=" + database.getJdbcUrl(),
-                    "spring.datasource.username=" + database.getUsername(),
-                    "spring.datasource.password=" + database.getPassword()
-            ).applyTo(configurableApplicationContext.getEnvironment());
-        }
+    @DynamicPropertySource
+    static void databaseProperties(DynamicPropertyRegistry registry) {
+        registry.add("spring.datasource.url",database::getJdbcUrl);
+        registry.add("spring.datasource.username", database::getUsername);
+        registry.add("spring.datasource.password", database::getPassword);
     }
 }

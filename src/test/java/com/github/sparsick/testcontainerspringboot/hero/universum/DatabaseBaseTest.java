@@ -1,14 +1,10 @@
 package com.github.sparsick.testcontainerspringboot.hero.universum;
 
-import org.springframework.boot.test.util.TestPropertyValues;
-import org.springframework.context.ApplicationContextInitializer;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.MySQLContainer;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 
-@ContextConfiguration(initializers = DatabaseBaseTest.Initializer.class)
 public abstract class DatabaseBaseTest {
     static final MySQLContainer DATABASE = new MySQLContainer();
 
@@ -16,15 +12,10 @@ public abstract class DatabaseBaseTest {
         DATABASE.start();
     }
 
-    static class Initializer implements
-            ApplicationContextInitializer<ConfigurableApplicationContext> {
-        public void initialize(ConfigurableApplicationContext
-                                       configurableApplicationContext) {
-            TestPropertyValues.of(
-                    "spring.datasource.url=" + DATABASE.getJdbcUrl(),
-                    "spring.datasource.username=" + DATABASE.getUsername(),
-                    "spring.datasource.password=" + DATABASE.getPassword()
-            ).applyTo(configurableApplicationContext.getEnvironment());
-        }
+    @DynamicPropertySource
+    static void databaseProperties(DynamicPropertyRegistry registry) {
+        registry.add("spring.datasource.url", DATABASE::getJdbcUrl);
+        registry.add("spring.datasource.username", DATABASE::getUsername);
+        registry.add("spring.datasource.password", DATABASE::getPassword);
     }
 }

@@ -8,6 +8,8 @@ import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Container;
@@ -22,7 +24,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-@ContextConfiguration(initializers = HeroRestControllerIT.Initializer.class)
 @AutoConfigureMockMvc
 @Testcontainers
 class HeroRestControllerIT {
@@ -46,15 +47,10 @@ class HeroRestControllerIT {
                 .andExpect(jsonPath("$[*].name", containsInAnyOrder("Batman", "Superman")));
     }
 
-    static class Initializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
-        @Override
-        public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
-
-            TestPropertyValues.of(
-                    "spring.datasource.url=" + database.getJdbcUrl(),
-                    "spring.datasource.username=" + database.getUsername(),
-                    "spring.datasource.password=" + database.getPassword()
-            ).applyTo(configurableApplicationContext.getEnvironment());
-        }
+    @DynamicPropertySource
+    static void databaseProperties(DynamicPropertyRegistry registry) {
+        registry.add("spring.datasource.url",database::getJdbcUrl);
+        registry.add("spring.datasource.username", database::getUsername);
+        registry.add("spring.datasource.password", database::getPassword);
     }
 }
