@@ -1,4 +1,7 @@
 # Demo
+
+![Build Status](https://github.com/sparsick/testcontainer-spring-boot/workflows/MavenBuild/badge.svg)
+
 Spring Boot Demo Application
 
 ```
