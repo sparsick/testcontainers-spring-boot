@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Testcontainers
 class HeroSpringDataJpaRepositoryIT {
     @Container
-    private static MySQLContainer database = new MySQLContainer();
+    private static MySQLContainer database = new MySQLContainer("mysql:5.7.34");
 
     @Autowired
     private HeroSpringDataJpaRepository repositoryUnderTest;

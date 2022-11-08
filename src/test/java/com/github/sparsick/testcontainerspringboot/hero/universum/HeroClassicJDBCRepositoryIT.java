@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Testcontainers
 class HeroClassicJDBCRepositoryIT {
     @Container
-    private MySQLContainer database = new MySQLContainer();
+    private MySQLContainer database = new MySQLContainer("mysql:5.7.34");
 
     private HeroClassicJDBCRepository repositoryUnderTest;
 
