@@ -1,6 +1,5 @@
 # Demo
-
-![Build Status](https://github.com/sparsick/testcontainers-spring-boot/workflows/MavenBuild/badge.svg)
+[![MavenBuild](https://github.com/sparsick/testcontainers-spring-boot/actions/workflows/build.yml/badge.svg)](https://github.com/sparsick/testcontainers-spring-boot/actions/workflows/build.yml)
 
 Spring Boot Demo Application
 
