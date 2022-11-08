@@ -40,6 +40,18 @@ public class Hero {
         return universum;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setUniversum(ComicUniversum universum) {
+        this.universum = universum;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

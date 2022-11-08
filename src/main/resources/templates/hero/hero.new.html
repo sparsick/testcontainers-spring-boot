@@ -13,27 +13,31 @@
 <main class="container">
     <h1>New Hero</h1>
 
-    <form th:action="@{/hero/new}" method="post" th:object="${newHero}">
-        <div class="form-group row">
-            <label for="nameInput" class="col-sm-1 col-form-label">Name</label>
-            <input id="nameInput" type="text" class="mb-1" th:field="*{hero.name}">
+    <form class="row-cols-2" th:action="@{/hero/new}" method="post" th:object="${newHero}">
+        <div class="row mb-3">
+            <label for="nameInput" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+                <input id="nameInput" type="text" class="form-control" th:field="*{hero.name}">
+            </div>
         </div>
-        <div class="form-group row">
-            <label for="cityInput" class="col-sm-1 col-form-label">City</label>
-            <input id="cityInput" type="text" class="mb-1"  th:field="*{hero.city}">
+        <div class="row mb-3">
+            <label for="cityInput" class="col-sm-2 col-form-label">City</label>
+            <div class="col-sm-10">
+                <input id="cityInput" type="text" class="form-control" th:field="*{hero.city}">
+            </div>
         </div>
-        <div class="form-group row">
-            <label for="universumInput" class="col-sm-1 col-form-label">Universum</label>
-            <select id="universumInput" class="mb-1" th:field="*{hero.universum}">
-                <option th:each="universum : ${T(com.github.sparsick.testcontainerspringboot.hero.universum.ComicUniversum).values()}"
-                        th:value="${universum}"
-                        th:text="${universum.displayName}">
-                </option>
-            </select>
+        <div class="row mb-3">
+            <label for="universumInput" class="col-sm-2 col-form-label">Universum</label>
+            <div class="col-sm-10">
+                <select id="universumInput" class="form-select" th:field="*{hero.universum}">
+                    <option th:each="universum : ${T(com.github.sparsick.testcontainerspringboot.hero.universum.ComicUniversum).values()}"
+                            th:value="${universum}"
+                            th:text="${universum.displayName}">
+                    </option>
+                </select>
+            </div>
         </div>
-        <div class="form-group">
-            <p><input role="button" class="btn btn-outline-secondary fas" type="submit" value="&#xf505; Add hero"></p>
-        </div>
+        <button type="submit" class="btn btn-outline-secondary col-sm-2"><i class='fas fa-user-shield'></i> Add hero</button>
     </form>
 </main>
 </body>
