@@ -10,15 +10,15 @@ on:
 
 jobs:
   jdk:
-    name: "JDK 11 Eclipse Temurin"
+    name: "JDK 17 Eclipse Temurin"
     runs-on: ubuntu-latest
-    container: "maven:3.8.6-eclipse-temurin-11"
+    container: "maven:3.8.6-eclipse-temurin-17"
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
         with:
           path: ~/.m2/repository
-          key: maven-jdk11-${{ hashFiles('**/pom.xml') }}
-          restore-keys: maven-jdk11
+          key: maven-jdk17-${{ hashFiles('**/pom.xml') }}
+          restore-keys: maven-jdk17
       - name: 'Build'
         run: mvn -V --no-transfer-progress clean verify --fail-at-end
