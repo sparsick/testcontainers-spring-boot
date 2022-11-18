@@ -1,6 +1,7 @@
 package com.github.sparsick.testcontainerspringboot.hero.universum;
 
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -17,6 +18,10 @@ import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+import java.time.Duration;
+import java.time.temporal.TemporalUnit;
+import java.util.concurrent.TimeUnit;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.testcontainers.Testcontainers.exposeHostPorts;
 
@@ -26,7 +31,6 @@ class HeroStartPageIT {
 
     @Container
     private static final BrowserWebDriverContainer<?> chromeBrowserContainer = new BrowserWebDriverContainer<>() // one browser for all tests
-            .withCapabilities(new ChromeOptions())
             .withAccessToHost(true);
 
     @Container
@@ -41,7 +45,12 @@ class HeroStartPageIT {
     @BeforeEach
     void setUp(){
         exposeHostPorts(heroPort);
-        browser = chromeBrowserContainer.getWebDriver();
+        browser = new RemoteWebDriver(chromeBrowserContainer.getSeleniumAddress(), new ChromeOptions());
+        browser.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+    }
+    @AfterEach
+    void cleanUp() {
+        browser.quit();
     }
 
     @Test
