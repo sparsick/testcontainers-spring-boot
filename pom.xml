@@ -13,6 +13,7 @@
         <junit.jupiter.version>5.7.0</junit.jupiter.version>
         <testcontainers.version>1.17.6</testcontainers.version>
         <selenium.version>4.6.0</selenium.version>
+        <playwright.version>1.28.0</playwright.version>
     </properties>
 
     <dependencies>
@@ -112,6 +113,11 @@
             <version>${selenium.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.microsoft.playwright</groupId>
+            <artifactId>playwright</artifactId>
+            <version>${playwright.version}</version>
+          </dependency>
     </dependencies>
 
     <dependencyManagement>
