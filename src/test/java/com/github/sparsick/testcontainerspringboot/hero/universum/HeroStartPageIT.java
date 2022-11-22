@@ -19,8 +19,6 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.time.Duration;
-import java.time.temporal.TemporalUnit;
-import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.testcontainers.Testcontainers.exposeHostPorts;
@@ -30,11 +28,11 @@ import static org.testcontainers.Testcontainers.exposeHostPorts;
 class HeroStartPageIT {
 
     @Container
-    private static final BrowserWebDriverContainer<?> chromeBrowserContainer = new BrowserWebDriverContainer<>() // one browser for all tests
+    private static final BrowserWebDriverContainer<?> seleniumContainer = new BrowserWebDriverContainer<>() // one browser for all tests
             .withAccessToHost(true);
 
     @Container
-    private static MySQLContainer database = new MySQLContainer("mysql:5.7.34");
+    private static final MySQLContainer database = new MySQLContainer("mysql:5.7.34");
 
     @LocalServerPort
     private int heroPort;
@@ -45,7 +43,7 @@ class HeroStartPageIT {
     @BeforeEach
     void setUp(){
         exposeHostPorts(heroPort);
-        browser = new RemoteWebDriver(chromeBrowserContainer.getSeleniumAddress(), new ChromeOptions());
+        browser = new RemoteWebDriver(seleniumContainer.getSeleniumAddress(), new ChromeOptions());
         browser.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
     }
     @AfterEach
