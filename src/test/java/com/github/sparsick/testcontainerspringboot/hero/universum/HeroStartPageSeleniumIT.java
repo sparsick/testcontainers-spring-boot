@@ -25,7 +25,7 @@ import static org.testcontainers.Testcontainers.exposeHostPorts;
 
 @Testcontainers
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-class HeroStartPageIT {
+class HeroStartPageSeleniumIT {
 
     @Container
     private static final BrowserWebDriverContainer<?> seleniumContainer = new BrowserWebDriverContainer<>() // one browser for all tests
