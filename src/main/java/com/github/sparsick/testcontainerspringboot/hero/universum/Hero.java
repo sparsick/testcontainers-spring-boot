@@ -3,10 +3,11 @@ package com.github.sparsick.testcontainerspringboot.hero.universum;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class Hero {
+public class Hero implements Serializable {
 
     @Id
     @GeneratedValue
