@@ -28,7 +28,7 @@ import com.microsoft.playwright.Playwright;
 class HeroStartPagePlaywrightIT {
 
     @Container
-    static GenericContainer<?> chromeContainer = new GenericContainer<>( DockerImageName.parse( "browserless/chrome:1.54.0-chrome-stable" ) )
+    private static GenericContainer<?> chromeContainer = new GenericContainer<>( DockerImageName.parse( "browserless/chrome:1.54.0-chrome-stable" ) )
             .withAccessToHost( true )
             .withExposedPorts( 3000 )
             .waitingFor( Wait.forHttp( "/" ) );
